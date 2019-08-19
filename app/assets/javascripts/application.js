@@ -17,6 +17,28 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function () {
+scroll_bottom = function(){
+    if($('#message_box').length>0){
+        $('#message_box').scrollTop($('#message_box')[0].scrollHeight);
+    }
+}
+
+submit_message = function(){
+    $('#message_body').on('keydown', function (e) {
+        if(e.keyCode ==13){
+            $('button').click();
+            $(this).val('');
+        }
+    })
+}
+
+
+
+$(document).on('turbolinks:load', function () {
     $('.dropdown').dropdown();
+    $('.message .close')
+        .on('click', function () {
+            $(this).closest('.message').transition('fade');
+        });
+    scroll_bottom();
 })
